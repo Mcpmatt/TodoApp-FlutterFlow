@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/add_task_widget.dart';
 import '/components/task_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -52,7 +51,7 @@ class _CompletedWidgetState extends State<CompletedWidget> {
             width: double.infinity,
             height: double.infinity,
             decoration: BoxDecoration(
-              color: const Color(0xFF54C8F6),
+              color: const Color(0xFFCC0000),
               borderRadius: BorderRadius.circular(50.0),
               border: Border.all(
                 color: Colors.black,
@@ -64,23 +63,14 @@ class _CompletedWidgetState extends State<CompletedWidget> {
               hoverColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onTap: () async {
-                await showModalBottomSheet(
-                  isScrollControlled: true,
-                  backgroundColor: Colors.transparent,
-                  context: context,
-                  builder: (context) {
-                    return GestureDetector(
-                      onTap: () => FocusScope.of(context).unfocus(),
-                      child: Padding(
-                        padding: MediaQuery.viewInsetsOf(context),
-                        child: const AddTaskWidget(),
-                      ),
-                    );
-                  },
-                ).then((value) => safeSetState(() {}));
+                GoRouter.of(context).prepareAuthEvent();
+                await authManager.signOut();
+                GoRouter.of(context).clearRedirectLocation();
+
+                context.goNamedAuth('login', context.mounted);
               },
               child: const Icon(
-                Icons.add_rounded,
+                Icons.logout,
                 color: Colors.black,
                 size: 30.0,
               ),
