@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "User Schema",
+  "type": "object",
+  "additionalProperties": {
+    "type": "object",
+    "properties": {
+      "birthday": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "created_time": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "display_name": {
+        "type": "string"
+      },
+      "email": {
+        "type": "string",
+        "format": "email"
+      },
+      "interests": {
+        "type": "string"
+      },
+      "phone_number": {
+        "type": "string",
+        "pattern": "^\\d{3}-\\d{3}-\\d{4}$"  // Example format for US phone numbers
+      },
+      "uid": {
+        "type": "string"
+      }
+    },
+    "required": ["uid", "display_name", "email"]
+  }
+}

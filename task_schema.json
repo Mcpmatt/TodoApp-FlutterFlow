@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Task Schema",
+  "type": "object",
+  "additionalProperties": {
+    "type": "object",
+    "properties": {
+      "completed": {
+        "type": "boolean"
+      },
+      "created": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "details": {
+        "type": "string"
+      },
+      "title": {
+        "type": "string"
+      },
+      "user": {
+        "type": "string",
+        "pattern": "^/users/[a-zA-Z0-9]+$" // Pattern to match user document reference
+      }
+    },
+    "required": ["title", "user", "completed"]
+  }
+}
