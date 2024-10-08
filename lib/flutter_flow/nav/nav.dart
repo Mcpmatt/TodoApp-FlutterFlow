@@ -85,7 +85,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'login',
           path: '/login',
-          builder: (context, params) => const LoginWidget(),
+          builder: (context, params) => LoginWidget(
+            test1: params.getParam(
+              'test1',
+              ParamType.String,
+            ),
+            test2: params.getParam(
+              'test2',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
           name: 'tasks',
