@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -9,7 +10,14 @@ import 'login_model.dart';
 export 'login_model.dart';
 
 class LoginWidget extends StatefulWidget {
-  const LoginWidget({super.key});
+  const LoginWidget({
+    super.key,
+    String? test1,
+    this.test2,
+  }) : test1 = test1 ?? 'Account Creation Success!';
+
+  final String test1;
+  final String? test2;
 
   @override
   State<LoginWidget> createState() => _LoginWidgetState();
@@ -722,6 +730,18 @@ class _LoginWidgetState extends State<LoginWidget>
                                   !_model.formKey2.currentState!.validate()) {
                                 return;
                               }
+                              _model.apiVar1 = await SendEmailToUserCall.call(
+                                to: _model.signupEmailTextController.text,
+                                subject: valueOrDefault<String>(
+                                  widget.test1,
+                                  'Account Creation Success!',
+                                ),
+                                text: valueOrDefault<String>(
+                                  widget.test2,
+                                  'Welcome! Thank you for creating an account!',
+                                ),
+                              );
+
                               GoRouter.of(context).prepareAuthEvent();
                               if (_model.signupPasswordTextController.text !=
                                   _model.signupConfirmPasswordTextController
@@ -758,6 +778,8 @@ class _LoginWidgetState extends State<LoginWidget>
 
                               context.goNamedAuth(
                                   'onboarding', context.mounted);
+
+                              safeSetState(() {});
                             },
                             text: 'Sign up',
                             options: FFButtonOptions(
